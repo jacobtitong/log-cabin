@@ -58,18 +58,13 @@
 
 /* Main Layout */
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 50px 1fr 50px;
   grid-template-columns: 100vw;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
   background-color: var(--bg-color);
-}
-
-.scroll-parent {
-  display: grid;
-  grid-template-rows: 1fr 50px;
 }
 
 header,
@@ -77,6 +72,11 @@ main,
 footer {
   display: flex;
   justify-content: center;
+}
+
+header {
+  position: sticky;
+  top: 0;
 }
 
 .header-content,
@@ -130,9 +130,14 @@ footer {
 
 aside {
   padding: 50px;
+}
+
+.sticky {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 50px;
+  position: sticky;
+  top: 100px;
 }
 
 .menu {
@@ -257,10 +262,6 @@ header {
 }
 
 /* Main content styles */
-.scroll-parent {
-  overflow-y: auto;
-}
-
 /* Aside */
 aside {
   border-right: solid 1px var(--primary-color);
