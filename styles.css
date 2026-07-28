@@ -142,9 +142,11 @@ aside {
 
 .menu nav ul li {
   display: flex;
+  gap: 15px;
 }
 
 /* Icon styles */
+li,
 svg,
 path {
   fill: inherit;
@@ -178,8 +180,8 @@ path {
   fill: var(--secondary-color);
 }
 
-.plus-icon.selected,
-.minus-icon.selected {
+li.selected .plus-icon,
+li.selected .minus-icon {
   fill: var(--primary-color);
 }
 
@@ -214,4 +216,17 @@ header {
   font-family: var(--primary-font);
   font-weight: regular;
   color: var(--secondary-color);
+}
+
+.menu nav ul {
+  list-style-type: none;
+  color: var(--secondary-color);
+  font-family: var(--primary-font);
+  font-weight: regular;
+  font-size: 1.25rem;
+}
+
+.menu nav ul .selected {
+  color: var(--primary-color);
+  font-weight: bold;
 }
