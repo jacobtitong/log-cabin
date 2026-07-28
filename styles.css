@@ -60,11 +60,16 @@
 body {
   overflow: hidden;
   display: grid;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 50px 1fr;
   grid-template-columns: 100vw;
   height: 100vh;
   justify-content: center;
   background-color: var(--bg-color);
+}
+
+.scroll-parent {
+  display: grid;
+  grid-template-rows: 1fr 50px;
 }
 
 header,
@@ -252,7 +257,7 @@ header {
 }
 
 /* Main content styles */
-main {
+.scroll-parent {
   overflow-y: auto;
 }
 
