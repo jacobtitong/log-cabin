@@ -92,3 +92,57 @@ footer {
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
+
+.brand {
+  display: flex;
+}
+
+.brand-text span {
+  display: inline-block;
+}
+
+/* Icon styles */
+svg,
+path {
+  fill: inherit;
+}
+
+.brand-logo {
+  width: 24px;
+  height: 24px;
+  fill: var(--white-color);
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  fill: var(--white-color);
+}
+
+.dot-separator {
+  width: 2px;
+  height: 2px;
+  fill: var(--secondary-color);
+}
+
+.brand-text .dot-separator {
+  fill: var(--white-color);
+}
+
+.footer-content .dot-separator {
+  fill: var(--primary-color);
+}
+
+.plus-icon,
+.minus-icon {
+  fill: var(--secondary-color);
+}
+
+.plus-icon.selected,
+.minus-icon.selected {
+  fill: var(--primary-color);
+}
+
+.add-log .plus-icon {
+  fill: var(--primary-color);
+}
