@@ -52,7 +52,7 @@
 
   /* Fonts */
   --primary-font: SometypeMono;
-  --header-font: Inter;
+  --heading-font: Inter;
 }
 
 /* Main Layout */
@@ -120,6 +120,30 @@ footer {
   align-items: center;
 }
 
+aside {
+  padding: 50px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.menu h1 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu nav ul {
+  padding: 0;
+}
+
+.menu nav ul li {
+  display: flex;
+}
+
 /* Icon styles */
 svg,
 path {
@@ -173,4 +197,21 @@ header {
   font-family: var(--primary-font);
   font-weight: bold;
   text-transform: uppercase;
+}
+
+/* Main content styles */
+/* Aside */
+.menu h1 {
+  font-size: 5.625rem;
+  font-family: var(--heading-font);
+  font-weight: bold;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.menu h1 span {
+  font-size: 1.25rem;
+  font-family: var(--primary-font);
+  font-weight: regular;
+  color: var(--secondary-color);
 }
