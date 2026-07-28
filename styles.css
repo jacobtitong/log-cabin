@@ -232,3 +232,13 @@ header {
   color: var(--primary-color);
   font-weight: bold;
 }
+
+.library-status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--secondary-color);
+  font-size: 0.938rem;
+  font-family: var(--primary-font);
+  font-weight: regular;
+}
