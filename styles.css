@@ -124,6 +124,9 @@ footer {
 
 aside {
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .menu {
@@ -145,6 +148,18 @@ aside {
 .menu nav ul li {
   display: flex;
   gap: 15px;
+}
+
+.add-log button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  gap: 10px;
+}
+
+.add-log button span {
+  display: inline-block;
 }
 
 /* Icon styles */
@@ -205,6 +220,10 @@ header {
 
 /* Main content styles */
 /* Aside */
+aside {
+  border-right: solid 1px var(--primary-color);
+}
+
 .menu h1 {
   font-size: 5.625rem;
   font-family: var(--heading-font);
@@ -241,4 +260,25 @@ header {
   font-size: 0.938rem;
   font-family: var(--primary-font);
   font-weight: regular;
+}
+
+.add-log button {
+  width: 100%;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  font-family: var(--primary-font);
+  font-weight: regular;
+  color: var(--primary-color);
+  border: solid 0.5px var(--primary-color);
+  background: none;
+}
+
+.add-log button:hover {
+  color: var(--bg-color);
+  background-color: var(--primary-color);
+  fill: var(--bg-color);
+}
+
+.add-log button:hover .plus-icon {
+  fill: inherit;
 }
