@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "Inter";
+  src:
+    url("fonts/Inter18pt-Bold.woff2") format("woff2"),
+    url("fonts/Inter18pt-Bold.woff") format("woff");
+
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SometypeMono";
+
+  src:
+    url("fonts/SometypeMono-Regular.woff2") format("woff2"),
+    url("fonts/SometypeMono-Regular.woff") format("woff");
+  font-weight: regular;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SometypeMono";
+
+  src:
+    url("fonts/SometypeMono-Medium.woff2") format("woff2"),
+    url("fonts/SometypeMono-Medium.woff") format("woff");
+  font-weight: medium;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SometypeMono";
+
+  src:
+    url("fonts/SometypeMono-Bold.woff2") format("woff2"),
+    url("fonts/SometypeMono-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Color Palette */
+  --header-color: #212121;
+  --primary-color: #3d3d3d;
+  --secondary-color: #8d8d8e;
+  --main-bg-color: #fffbf3;
+  --white-color: #ffffff;
+
+  /* Fonts */
+  --primary-font: SometypeMono;
+  --header-font: Inter;
+}
