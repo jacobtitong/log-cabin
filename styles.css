@@ -54,3 +54,41 @@
   --primary-font: SometypeMono;
   --header-font: Inter;
 }
+
+/* Main Layout */
+body {
+  display: grid;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-columns: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+header,
+main,
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+.header-content,
+.footer-content,
+.main-content {
+  max-width: 1300px;
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
