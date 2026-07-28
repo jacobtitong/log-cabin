@@ -49,6 +49,7 @@
   --secondary-color: #8d8d8e;
   --main-bg-color: #fffbf3;
   --white-color: #ffffff;
+  --bg-color: #fffbf3;
 
   /* Fonts */
   --primary-font: SometypeMono;
@@ -62,6 +63,7 @@ body {
   grid-template-columns: 100vw;
   height: 100vh;
   justify-content: center;
+  background-color: var(--bg-color);
 }
 
 header,
