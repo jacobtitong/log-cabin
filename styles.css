@@ -76,11 +76,13 @@ footer {
 .main-content {
   max-width: 1300px;
   width: 100%;
+  padding: 0 30px;
 }
 
 .header-content {
   display: flex;
   justify-content: space-between;
+  padding: 0 50px;
 }
 
 .footer-content {
@@ -95,10 +97,27 @@ footer {
 
 .brand {
   display: flex;
+  gap: 5px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .brand-text span {
   display: inline-block;
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
 }
 
 /* Icon styles */
@@ -109,19 +128,16 @@ path {
 
 .brand-logo {
   width: 24px;
-  height: 24px;
   fill: var(--white-color);
 }
 
 .profile-icon {
   width: 40px;
-  height: 40px;
   fill: var(--white-color);
 }
 
 .dot-separator {
   width: 2px;
-  height: 2px;
   fill: var(--secondary-color);
 }
 
@@ -145,4 +161,16 @@ path {
 
 .add-log .plus-icon {
   fill: var(--primary-color);
+}
+
+/* Header styles */
+header {
+  background-color: var(--header-color);
+}
+
+.brand-text {
+  color: white;
+  font-family: var(--primary-font);
+  font-weight: bold;
+  text-transform: uppercase;
 }
