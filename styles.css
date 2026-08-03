@@ -168,6 +168,7 @@ aside {
   justify-content: center;
   padding: 5px;
   gap: 10px;
+  cursor: pointer;
 }
 
 .add-log button span {
@@ -412,6 +413,7 @@ dialog * {
 .exit-button {
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
 }
 
 .exit-button svg {
