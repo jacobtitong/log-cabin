@@ -185,11 +185,12 @@ aside {
   padding: 10px;
   padding-bottom: 20px;
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 200px 1fr;
   gap: 89px;
 }
 
 .log-status {
+  width: auto;
   display: flex;
   align-items: center;
   height: max-content;

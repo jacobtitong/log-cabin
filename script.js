@@ -4,6 +4,65 @@ function LogLibrary(library) {
 
 LogLibrary.prototype.addLog = function (title, description, date, author) {
   this.library.push(new Log(title, description, date, author));
+
+  const logsContent = document.querySelector(".logs-content");
+
+  // Adding log to DOM
+  // Creating elements
+  const card = document.createElement("div");
+  const logStatus = document.createElement("div");
+  const dateElement = document.createElement("span");
+  const dotSeparator = document.createElement("span");
+  const svgDotSeparator = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+  const circle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "circle",
+  );
+  const authorElement = document.createElement("span");
+  const preview = document.createElement("div");
+  const titleElement = document.createElement("h2");
+  const descriptionElement = document.createElement("p");
+
+  // Setting attributes
+  svgDotSeparator.setAttribute("width", "2");
+  svgDotSeparator.setAttribute("height", "2");
+  svgDotSeparator.setAttribute("viewBox", "0 0 2 2");
+  svgDotSeparator.setAttribute("fill", "none");
+  svgDotSeparator.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  circle.setAttribute("cx", "1");
+  circle.setAttribute("cy", "1");
+  circle.setAttribute("r", "1");
+  circle.setAttribute("fill", "#8D8D8E");
+
+  // Adding classes & contents
+  card.classList.add("card");
+  logStatus.classList.add("log-status");
+  dateElement.classList.add("date");
+  dotSeparator.classList.add("dot-separator");
+  authorElement.classList.add("author");
+  preview.classList.add("preview");
+  titleElement.classList.add("truncate");
+  descriptionElement.classList.add("truncate");
+
+  titleElement.textContent = title;
+  descriptionElement.textContent = description;
+  dateElement.textContent = date;
+  authorElement.textContent = author;
+
+  // Appending to DOM
+  logsContent.appendChild(card);
+  card.appendChild(logStatus);
+  logStatus.appendChild(dateElement);
+  logStatus.appendChild(dotSeparator);
+  dotSeparator.appendChild(svgDotSeparator);
+  svgDotSeparator.appendChild(circle);
+  logStatus.appendChild(authorElement);
+  card.appendChild(preview);
+  preview.appendChild(titleElement);
+  preview.appendChild(descriptionElement);
 };
 
 function Log(title, description, date, author) {
