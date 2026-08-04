@@ -46,7 +46,7 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
   card.classList.add("card");
   logStatus.classList.add("log-status");
   dateElement.classList.add("date", "truncate");
-  dotSeparator.classList.add("dot-separator");
+  dotSeparator.classList.add("dot-separator", "icon");
   authorElement.classList.add("author", "truncate");
   preview.classList.add("preview");
   titleElement.classList.add("truncate");
