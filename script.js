@@ -3,6 +3,11 @@ function LogLibrary(library) {
 }
 
 LogLibrary.prototype.addLog = function (title, description, date, author) {
+  date = formatDate(date);
+  if (date == null) {
+    return;
+  }
+
   this.library.push(new Log(title, description, date, author));
 
   const logsContent = document.querySelector(".logs-content");
@@ -40,9 +45,9 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
   // Adding classes & contents
   card.classList.add("card");
   logStatus.classList.add("log-status");
-  dateElement.classList.add("date");
+  dateElement.classList.add("date", "truncate");
   dotSeparator.classList.add("dot-separator");
-  authorElement.classList.add("author");
+  authorElement.classList.add("author", "truncate");
   preview.classList.add("preview");
   titleElement.classList.add("truncate");
   descriptionElement.classList.add("truncate");
@@ -71,6 +76,60 @@ function Log(title, description, date, author) {
   this.date = date;
   this.author = author;
   this.id = crypto.randomUUID();
+}
+
+function formatDate(date) {
+  date = date.split("-").reverse();
+
+  if (date[2] > 9999 || date[2] < 1000) {
+    return null;
+  }
+
+  [date[0], date[1]] = [date[1], date[0]];
+
+  date[1] += ",";
+
+  switch (date[0]) {
+    case "01":
+      date[0] = "Jan";
+      break;
+    case "02":
+      date[0] = "Feb";
+      break;
+    case "03":
+      date[0] = "Mar";
+      break;
+    case "04":
+      date[0] = "Apr";
+      break;
+    case "05":
+      date[0] = "May";
+      break;
+    case "06":
+      date[0] = "Jun";
+      break;
+    case "07":
+      date[0] = "Jul";
+      break;
+    case "08":
+      date[0] = "Aug";
+      break;
+    case "09":
+      date[0] = "Sep";
+      break;
+    case "10":
+      date[0] = "Oct";
+      break;
+    case "11":
+      date[0] = "Nov";
+      break;
+    case "12":
+      date[0] = "Dec";
+      break;
+  }
+
+  date = date.join(" ");
+  return date;
 }
 
 // Displaying and Hiding Dialog

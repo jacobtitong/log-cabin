@@ -185,8 +185,8 @@ aside {
   padding: 10px;
   padding-bottom: 20px;
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 89px;
+  grid-template-columns: 250px 1fr;
+  gap: 50px;
 }
 
 .log-status {
@@ -342,6 +342,14 @@ aside {
   font-family: var(--primary-font);
   font-weight: 400;
   color: var(--secondary-color);
+}
+
+.log-status .date {
+  width: 120px;
+}
+
+.log-status .author {
+  flex: 1;
 }
 
 .preview {
