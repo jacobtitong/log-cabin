@@ -354,11 +354,6 @@ aside {
   max-width: 120px;
 }
 
-/*
-.log-status .author {
-  flex: 1;
-} */
-
 .preview {
   display: flex;
   flex-direction: column;
