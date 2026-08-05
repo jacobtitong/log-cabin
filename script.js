@@ -1,5 +1,9 @@
 function Journals(journals) {
   this.journals = journals;
+  // Initialize an "All" journal
+  this.journals.push(new Journal("All"));
+  const all = document.querySelector("#all");
+  all.setAttribute("data-id", journals[0].id);
 }
 
 Journals.prototype.addJournal = function (name) {
@@ -211,6 +215,7 @@ addJournalButton.addEventListener("click", () => {
     );
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
+    liJournalList.setAttribute("data-id", allJournals.journals.at(-1).id);
     svgMinus.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgMinus.setAttribute("height", "24px");
     svgMinus.setAttribute("viewBox", "0 -960 960 960");
