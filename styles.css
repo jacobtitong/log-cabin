@@ -299,13 +299,12 @@ aside {
   font-size: 1.25rem;
 }
 
-.menu nav ul .selected {
-  color: var(--primary-color);
-  font-weight: 700;
-}
-
 .menu nav ul .journal-list li {
   cursor: pointer;
+}
+
+.journal-list .journal-name {
+  max-width: 160px;
 }
 
 .journal-list .clicked {

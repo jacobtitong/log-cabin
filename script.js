@@ -248,6 +248,7 @@ addJournalButton.addEventListener("click", () => {
     // Add journal to list
     const liJournalList = document.createElement("li");
     const spanIcon = document.createElement("span");
+    const spanJournalName = document.createElement("span");
     const spanPosts = document.createElement("span");
     const svgMinus = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -263,14 +264,17 @@ addJournalButton.addEventListener("click", () => {
     svgMinus.setAttribute("fill", "#e3e3e3");
     path.setAttribute("d", "M200-440v-80h560v80H200Z");
 
+    spanJournalName.classList.add("journal-name", "truncate");
     spanIcon.classList.add("minus-icon", "icon");
     spanPosts.classList.add("number-of-posts");
+
+    spanJournalName.textContent = formDataObj.name;
 
     menuList.appendChild(liJournalList);
     liJournalList.appendChild(spanIcon);
     spanIcon.appendChild(svgMinus);
     svgMinus.appendChild(path);
-    liJournalList.append(formDataObj.name);
+    liJournalList.appendChild(spanJournalName);
     liJournalList.appendChild(spanPosts);
 
     // Move to new journal
