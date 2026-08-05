@@ -308,6 +308,16 @@ aside {
   cursor: pointer;
 }
 
+.journal-list .clicked {
+  color: var(--primary-color);
+  font-weight: 700;
+  fill: var(--primary-color);
+}
+
+.journal-list .clicked > span {
+  fill: inherit;
+}
+
 .menu nav ul input {
   outline: none;
   border: none;
