@@ -226,6 +226,8 @@ addJournalButton.addEventListener("click", () => {
   li.appendChild(form);
   form.appendChild(input);
 
+  input.focus();
+
   addJournalButton.classList.add("clicked");
 
   // Removes the .clicked class from 2nd to last list element, so that, when creating a new journal, the previous list item's .clicked class would be removed.
