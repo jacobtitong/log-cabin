@@ -304,6 +304,10 @@ aside {
   font-weight: 700;
 }
 
+.menu nav ul .journal-list li {
+  cursor: pointer;
+}
+
 .menu nav ul input {
   outline: none;
   border: none;

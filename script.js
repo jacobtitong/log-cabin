@@ -171,6 +171,21 @@ function formatDate(date) {
 
 // Initialize journal
 const allJournals = new Journals([]);
+let currentJournal = allJournals.journals[0];
+
+// Allow moving of different journals
+function allowJournalMoving() {
+  const liJournalList = document.querySelectorAll(".menu .journal-list li");
+
+  liJournalList.forEach((li) => {
+    li.addEventListener("click", (e) => {
+      currentJournal = allJournals.journals.filter(
+        (journal) => journal.id == e.currentTarget.getAttribute("data-id"),
+      );
+      currentJournal = currentJournal[0];
+    });
+  });
+}
 
 // Adding a journal
 const addJournalButton = document.querySelector(".menu .add-journal");
@@ -232,6 +247,11 @@ addJournalButton.addEventListener("click", () => {
     svgMinus.appendChild(path);
     liJournalList.append(formDataObj.name);
     liJournalList.appendChild(spanPosts);
+
+    // Move to new journal
+    currentJournal = allJournals.journals.at(-1);
+
+    allowJournalMoving();
   });
 });
 
@@ -262,7 +282,7 @@ form.addEventListener("submit", (e) => {
   formDataObj = Object.fromEntries(formData);
   dialogLog.close();
 
-  mainJournal.logLibrary.addLog(
+  currentJournal.logLibrary.addLog(
     formDataObj.heading,
     formDataObj.paragraph,
     formDataObj.date,
