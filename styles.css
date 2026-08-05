@@ -46,6 +46,7 @@
   /* Color Palette */
   --header-color: #212121;
   --primary-color: #3d3d3d;
+  --primary-color-transparent: #3d3d3d71;
   --secondary-color: #8d8d8e;
   --secondary-color-transparent: #8d8d8e71;
   --main-bg-color: #fffbf3;
@@ -301,6 +302,23 @@ aside {
 .menu nav ul .selected {
   color: var(--primary-color);
   font-weight: 700;
+}
+
+.menu nav ul input {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary-color-transparent);
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+
+.menu nav ul input::placeholder {
+  color: var(--white-color);
+}
+
+.menu .add-journal {
+  cursor: pointer;
 }
 
 .library-status {

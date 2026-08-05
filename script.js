@@ -1,3 +1,32 @@
+function Journals(journals) {
+  this.journals = journals;
+}
+
+Journals.prototype.addJournal = function (name) {
+  this.journals.push(new Journal(name));
+};
+
+Journals.prototype.displayJournal = function (clickedID) {
+  for (const journal of this.journals) {
+    if (journal.id == clickedID) {
+      journal.displayLogs();
+    }
+  }
+};
+
+function Journal(name) {
+  // Initialize library of logs
+  this.logLibrary = new LogLibrary([]);
+  this.name = name;
+  this.id = crypto.randomUUID();
+}
+
+Journal.prototype.displayLogs = function () {
+  for (const log of this.logLibrary) {
+    displayLogElements(log.title, log.description, log.date, log.author);
+  }
+};
+
 function LogLibrary(library) {
   this.library = library;
 }
@@ -10,6 +39,18 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
 
   this.library.push(new Log(title, description, date, author));
 
+  displayLogElements(title, description, date, author);
+};
+
+function Log(title, description, date, author) {
+  this.title = title;
+  this.description = description;
+  this.date = date;
+  this.author = author;
+  this.id = crypto.randomUUID();
+}
+
+function displayLogElements(title, description, date, author) {
   const logsContent = document.querySelector(".logs-content");
 
   // Adding log to DOM
@@ -68,14 +109,6 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
   card.appendChild(preview);
   preview.appendChild(titleElement);
   preview.appendChild(descriptionElement);
-};
-
-function Log(title, description, date, author) {
-  this.title = title;
-  this.description = description;
-  this.date = date;
-  this.author = author;
-  this.id = crypto.randomUUID();
 }
 
 function formatDate(date) {
@@ -132,6 +165,71 @@ function formatDate(date) {
   return date;
 }
 
+// Initialize journal
+const allJournals = new Journals([]);
+
+// Adding a journal
+const addJournalButton = document.querySelector(".menu .add-journal");
+
+addJournalButton.addEventListener("click", () => {
+  if (addJournalButton.classList.contains("clicked")) {
+    return;
+  }
+  const menuList = document.querySelector(".menu nav ul .journal-list");
+  const li = document.createElement("li");
+  const form = document.createElement("form");
+  const input = document.createElement("input");
+
+  input.setAttribute("type", "text");
+  input.setAttribute("placeholder", "Enter name");
+  input.setAttribute("name", "name");
+
+  menuList.appendChild(li);
+  li.appendChild(form);
+  form.appendChild(input);
+
+  addJournalButton.classList.add("clicked");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addJournalButton.classList.remove("clicked");
+    const formData = new FormData(form);
+    formDataObj = Object.fromEntries(formData);
+
+    // Add journal here
+    allJournals.addJournal(formDataObj.name);
+
+    li.setAttribute("style", "display: none;");
+
+    // Add journal to list
+    const liJournalList = document.createElement("li");
+    const spanIcon = document.createElement("span");
+    const spanPosts = document.createElement("span");
+    const svgMinus = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg",
+    );
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    svgMinus.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgMinus.setAttribute("height", "24px");
+    svgMinus.setAttribute("viewBox", "0 -960 960 960");
+    svgMinus.setAttribute("width", "24px");
+    svgMinus.setAttribute("fill", "#e3e3e3");
+    path.setAttribute("d", "M200-440v-80h560v80H200Z");
+
+    spanIcon.classList.add("minus-icon", "icon");
+    spanPosts.classList.add("number-of-posts");
+
+    menuList.appendChild(liJournalList);
+    liJournalList.appendChild(spanIcon);
+    spanIcon.appendChild(svgMinus);
+    svgMinus.appendChild(path);
+    liJournalList.append(formDataObj.name);
+    liJournalList.appendChild(spanPosts);
+  });
+});
+
 // Displaying and Hiding Dialog
 const dialogLog = document.querySelector(".dialog-log");
 const showButton = document.querySelector(".add-log button");
@@ -150,9 +248,6 @@ document.addEventListener("click", (e) => {
   dialogLog.close();
 });
 
-// Initialize library of logs
-const logLibrary = new LogLibrary([]);
-
 // Gathering form data
 let formDataObj;
 const form = document.querySelector(".dialog-log form");
@@ -162,7 +257,7 @@ form.addEventListener("submit", (e) => {
   formDataObj = Object.fromEntries(formData);
   dialogLog.close();
 
-  logLibrary.addLog(
+  mainJournal.logLibrary.addLog(
     formDataObj.heading,
     formDataObj.paragraph,
     formDataObj.date,
