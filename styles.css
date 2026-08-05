@@ -575,3 +575,42 @@ dialog button:hover {
   color: var(--primary-color);
   background: none;
 }
+
+/* Dialog for log view */
+dialog.dialog-log-view {
+  width: max-content;
+  max-width: 65vw;
+  height: 65vh;
+  padding: 20px;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  font-weight: 500;
+}
+
+dialog.dialog-log-view .dialog-contents {
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+}
+
+dialog.dialog-log-view .heading {
+  padding: 0 0 10px 0;
+  font-weight: 700;
+  border-bottom: 1px solid var(--primary-color-transparent);
+}
+
+dialog.dialog-log-view .paragraph {
+  text-align: justify;
+  padding: 10px 0 0 0;
+  font-weight: 400;
+  border-bottom: 1px solid var(--secondary-color-transparent);
+}
+
+dialog.dialog-log-view .status {
+  padding: 10px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+dialog.dialog-log-view .status .author {
+  text-align: right;
+}
