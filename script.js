@@ -28,7 +28,7 @@ function LogLibrary(library) {
   this.library = library;
 }
 
-LogLibrary.prototype.addLog = function (title, description, date, author) {
+LogLibrary.prototype.addLog = function (title, description, date, author, id) {
   date = formatDate(date);
   if (date == null) {
     return;
@@ -38,6 +38,11 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
   generalJournal.logLibrary.library.push(
     new Log(title, description, date, author),
   );
+
+  if (currentJournal.id == generalJournal.id) {
+    displayLogElements(title, description, date, author);
+    return;
+  }
 
   // Add to current journal category
   this.library.push(new Log(title, description, date, author));
@@ -329,5 +334,6 @@ form.addEventListener("submit", (e) => {
     formDataObj.paragraph,
     formDataObj.date,
     formDataObj.author,
+    currentJournal.id,
   );
 });
