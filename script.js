@@ -10,14 +10,6 @@ Journals.prototype.addJournal = function (name) {
   this.journals.push(new Journal(name));
 };
 
-Journals.prototype.displayJournal = function (clickedID) {
-  for (const journal of this.journals) {
-    if (journal.id == clickedID) {
-      journal.displayLogs();
-    }
-  }
-};
-
 function Journal(name) {
   // Initialize library of logs
   this.logLibrary = new LogLibrary([]);
@@ -26,9 +18,10 @@ function Journal(name) {
 }
 
 Journal.prototype.displayLogs = function () {
-  for (const log of this.logLibrary) {
+  for (const log of this.logLibrary.library) {
     displayLogElements(log.title, log.description, log.date, log.author);
   }
+  removeCards(currentJournal.id);
 };
 
 function LogLibrary(library) {
@@ -42,7 +35,6 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
   }
 
   this.library.push(new Log(title, description, date, author));
-
   displayLogElements(title, description, date, author);
 };
 
@@ -52,6 +44,15 @@ function Log(title, description, date, author) {
   this.date = date;
   this.author = author;
   this.id = crypto.randomUUID();
+}
+
+function removeCards(journalID) {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    if (card.getAttribute("data-journal") != journalID) {
+      card.remove();
+    }
+  });
 }
 
 function displayLogElements(title, description, date, author) {
@@ -77,6 +78,7 @@ function displayLogElements(title, description, date, author) {
   const descriptionElement = document.createElement("p");
 
   // Setting attributes
+  card.setAttribute("data-journal", currentJournal.id);
   svgDotSeparator.setAttribute("width", "2");
   svgDotSeparator.setAttribute("height", "2");
   svgDotSeparator.setAttribute("viewBox", "0 0 2 2");
@@ -174,15 +176,32 @@ const allJournals = new Journals([]);
 let currentJournal = allJournals.journals[0];
 
 // Allow moving of different journals
-function allowJournalMoving() {
-  const liJournalList = document.querySelectorAll(".menu .journal-list li");
+function allowJournalMoving(initialJournal) {
+  initialJournal.classList.add("clicked");
+  currentJournal.displayLogs();
+  let liJournalList = document.querySelectorAll(".menu .journal-list li");
 
   liJournalList.forEach((li) => {
     li.addEventListener("click", (e) => {
+      liJournalList = document.querySelectorAll(".menu .journal-list li");
+
+      // Checks whether the list item has already been clicked before
+      if (e.currentTarget.classList.contains("clicked")) {
+        return;
+      }
+
       currentJournal = allJournals.journals.filter(
         (journal) => journal.id == e.currentTarget.getAttribute("data-id"),
       );
       currentJournal = currentJournal[0];
+      // Removes all classes of "clicked" in .journal-list
+      liJournalList.forEach((li) => {
+        li.classList.remove("clicked");
+      });
+      e.currentTarget.classList.add("clicked");
+      if (e.currentTarget.classList.contains("clicked")) {
+        currentJournal.displayLogs();
+      }
     });
   });
 }
@@ -209,8 +228,14 @@ addJournalButton.addEventListener("click", () => {
 
   addJournalButton.classList.add("clicked");
 
+  // Removes the .clicked class from 2nd to last list element, so that, when creating a new journal, the previous list item's .clicked class would be removed.
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    let latestList = document.querySelector(
+      ".menu nav ul .journal-list li[data-id]:nth-last-child(2)",
+    );
+    latestList.classList.remove("clicked");
+
     addJournalButton.classList.remove("clicked");
     const formData = new FormData(form);
     formDataObj = Object.fromEntries(formData);
@@ -251,7 +276,11 @@ addJournalButton.addEventListener("click", () => {
     // Move to new journal
     currentJournal = allJournals.journals.at(-1);
 
-    allowJournalMoving();
+    latestList = document.querySelector(
+      ".menu nav ul .journal-list li:last-child",
+    );
+
+    allowJournalMoving(latestList);
   });
 });
 

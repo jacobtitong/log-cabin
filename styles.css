@@ -174,7 +174,7 @@ aside {
 
 .logs-content {
   display: grid;
-  grid-template-rows: minmax(84px, auto);
+  grid-template-rows: repeat(auto-fill, minmax(84px, auto));
   padding: 10px 20px;
 }
 
