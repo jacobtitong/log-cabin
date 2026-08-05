@@ -34,6 +34,12 @@ LogLibrary.prototype.addLog = function (title, description, date, author) {
     return;
   }
 
+  // Add to "all" logs category
+  generalJournal.logLibrary.library.push(
+    new Log(title, description, date, author),
+  );
+
+  // Add to current journal category
   this.library.push(new Log(title, description, date, author));
   displayLogElements(title, description, date, author);
 };
@@ -173,7 +179,8 @@ function formatDate(date) {
 
 // Initialize journal
 const allJournals = new Journals([]);
-let currentJournal = allJournals.journals[0];
+const generalJournal = allJournals.journals[0];
+let currentJournal = generalJournal;
 
 // Allow moving of different journals
 function allowJournalMoving(initialJournal) {
