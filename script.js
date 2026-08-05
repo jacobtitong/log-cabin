@@ -19,7 +19,13 @@ function Journal(name) {
 
 Journal.prototype.displayLogs = function () {
   for (const log of this.logLibrary.library) {
-    displayLogElements(log.title, log.description, log.date, log.author);
+    displayLogElements(
+      log.title,
+      log.description,
+      log.date,
+      log.author,
+      log.id,
+    );
   }
   removeCards(currentJournal.id);
 };
@@ -40,13 +46,25 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
   );
 
   if (currentJournal.id == generalJournal.id) {
-    displayLogElements(title, description, date, author);
+    displayLogElements(
+      title,
+      description,
+      date,
+      author,
+      currentJournal.logLibrary.library.at(-1).id,
+    );
     return;
   }
 
   // Add to current journal category
   this.library.push(new Log(title, description, date, author));
-  displayLogElements(title, description, date, author);
+  displayLogElements(
+    title,
+    description,
+    date,
+    author,
+    currentJournal.logLibrary.library.at(-1).id,
+  );
 };
 
 function Log(title, description, date, author) {
@@ -57,6 +75,23 @@ function Log(title, description, date, author) {
   this.id = crypto.randomUUID();
 }
 
+Log.prototype.viewLog = function (heading, paragraph, date, author) {
+  const dialogLogView = document.querySelector(".dialog-log-view");
+  const headingElement = document.querySelector(".dialog-log-view .heading");
+  const paragraphElement = document.querySelector(
+    ".dialog-log-view .paragraph",
+  );
+  const dateElement = document.querySelector(".dialog-log-view .date");
+  const authorElement = document.querySelector(".dialog-log-view .author");
+
+  headingElement.textContent = heading;
+  paragraphElement.textContent = paragraph;
+  dateElement.textContent = date;
+  authorElement.textContent = author;
+
+  dialogLogView.showModal();
+};
+
 function removeCards(journalID) {
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
@@ -66,7 +101,7 @@ function removeCards(journalID) {
   });
 }
 
-function displayLogElements(title, description, date, author) {
+function displayLogElements(title, description, date, author, id) {
   const logsContent = document.querySelector(".logs-content");
 
   // Adding log to DOM
@@ -90,6 +125,7 @@ function displayLogElements(title, description, date, author) {
 
   // Setting attributes
   card.setAttribute("data-journal", currentJournal.id);
+  card.setAttribute("data-id", id);
   svgDotSeparator.setAttribute("width", "2");
   svgDotSeparator.setAttribute("height", "2");
   svgDotSeparator.setAttribute("viewBox", "0 0 2 2");
@@ -126,6 +162,8 @@ function displayLogElements(title, description, date, author) {
   card.appendChild(preview);
   preview.appendChild(titleElement);
   preview.appendChild(descriptionElement);
+
+  allowViewLogs();
 }
 
 function formatDate(date) {
@@ -186,6 +224,22 @@ function formatDate(date) {
 const allJournals = new Journals([]);
 const generalJournal = allJournals.journals[0];
 let currentJournal = generalJournal;
+
+// View logs
+function allowViewLogs() {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      currentJournal.logLibrary.library.forEach((log) => {
+        if (e.currentTarget.getAttribute("data-id") === log.id) {
+          log.viewLog(log.title, log.description, log.date, log.author);
+          return;
+        }
+      });
+    });
+  });
+}
 
 // Allow moving of different journals
 function allowJournalMoving(initialJournal) {
@@ -336,4 +390,5 @@ form.addEventListener("submit", (e) => {
     formDataObj.author,
     currentJournal.id,
   );
+  allowViewLogs();
 });
