@@ -26,6 +26,10 @@ Journal.prototype.getLogsCount = function () {
 };
 
 Journal.prototype.displayLogsCount = function (count, spanPosts) {
+  if (spanPosts.parentElement.classList.contains("posts-count")) {
+    spanPosts.textContent = ("0" + count).slice(-2);
+    return;
+  }
   spanPosts.textContent = "[" + ("0" + count).slice(-2) + "]";
 };
 
@@ -57,11 +61,15 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
     new Log(title, description, date, author),
   );
 
-  const menuNumPosts = document.querySelector(".menu .number-of-posts");
+  const menuNumPosts = document.querySelector(".menu h1 .number-of-posts");
+  const postsCount = document.querySelector(
+    ".menu .posts-count .number-of-posts",
+  );
 
   generalJournal.setLogsCount();
   generalJournal.displayLogsCount(generalJournal.getLogsCount(), spanPostsAll);
   generalJournal.displayLogsCount(generalJournal.getLogsCount(), menuNumPosts);
+  generalJournal.displayLogsCount(generalJournal.getLogsCount(), postsCount);
 
   if (currentJournal.id == generalJournal.id) {
     displayLogElements(
