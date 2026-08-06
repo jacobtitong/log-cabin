@@ -322,6 +322,14 @@ aside {
   fill: inherit;
 }
 
+.journal-list .journal-name {
+  order: 1;
+}
+
+.journal-list .number-of-posts {
+  order: 0;
+}
+
 .menu nav ul input {
   outline: none;
   border: none;
