@@ -548,4 +548,5 @@ form.addEventListener("submit", (e) => {
   );
   allowViewLogs();
   allowDeletions();
+  form.reset();
 });
