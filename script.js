@@ -57,8 +57,11 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
     new Log(title, description, date, author),
   );
 
+  const menuNumPosts = document.querySelector(".menu .number-of-posts");
+
   generalJournal.setLogsCount();
   generalJournal.displayLogsCount(generalJournal.getLogsCount(), spanPostsAll);
+  generalJournal.displayLogsCount(generalJournal.getLogsCount(), menuNumPosts);
 
   if (currentJournal.id == generalJournal.id) {
     displayLogElements(
