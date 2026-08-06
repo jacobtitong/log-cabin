@@ -32,7 +32,6 @@ Journals.prototype.setAuthorsCount = function () {
     return authorsList.indexOf(item) == pos;
   });
   this.authorsCount = authorsList.length;
-  console.log(authorsList, this.authorsCount);
 };
 
 Journals.prototype.displayAuthorsCount = function () {
@@ -60,10 +59,10 @@ Journal.prototype.getLogsCount = function () {
 
 Journal.prototype.displayLogsCount = function (count, spanPosts) {
   if (spanPosts.parentElement.classList.contains("posts-count")) {
-    spanPosts.textContent = ("0" + count).slice(-2);
+    spanPosts.textContent = count;
     return;
   }
-  spanPosts.textContent = "[" + ("0" + count).slice(-2) + "]";
+  spanPosts.textContent = "[" + count + "]";
 };
 
 Journal.prototype.displayLogs = function () {
@@ -343,7 +342,6 @@ const spanPostsAll = document.querySelector("#all .number-of-posts");
 let spanPosts;
 function setCurrentSpanPosts(span) {
   spanPosts = span;
-  console.log(spanPosts);
 }
 
 // Adding a journal
