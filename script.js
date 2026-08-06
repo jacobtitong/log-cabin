@@ -82,6 +82,60 @@ function LogLibrary(library) {
   this.library = library;
 }
 
+LogLibrary.prototype.deleteLog = function (id) {
+  allJournals.journals.forEach((journal) => {
+    journal.logLibrary.library.forEach((log, index) => {
+      if (log.id == id) {
+        journal.logLibrary.library.splice(index, 1);
+      }
+    });
+  });
+
+  allJournals.journals.forEach((journal) => {
+    const allSpanPosts = document.querySelectorAll(
+      ".journal-list .number-of-posts",
+    );
+    let spanElement;
+    allSpanPosts.forEach((span) => {
+      if (journal.id == span.parentElement.getAttribute("data-id")) {
+        spanElement = span;
+      }
+    });
+
+    journal.setLogsCount();
+    journal.displayLogsCount(journal.getLogsCount(), spanElement);
+  });
+
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    if (card.getAttribute("data-id") == id) {
+      card.remove();
+    }
+  });
+
+  const menuNumPosts = document.querySelector(".menu h1 .number-of-posts");
+  const postsCount = document.querySelector(
+    ".menu .posts-count .number-of-posts",
+  );
+  generalJournal.setLogsCount();
+  generalJournal.displayLogsCount(generalJournal.getLogsCount(), spanPostsAll);
+  generalJournal.displayLogsCount(generalJournal.getLogsCount(), menuNumPosts);
+  generalJournal.displayLogsCount(generalJournal.getLogsCount(), postsCount);
+  allJournals.setAuthorsCount();
+  allJournals.displayAuthorsCount();
+};
+
+function allowDeletions() {
+  const allDeleteIcons = document.querySelectorAll(".delete-icon");
+
+  allDeleteIcons.forEach((icon) => {
+    icon.addEventListener("click", (e) => {
+      const id = e.currentTarget.parentElement.getAttribute("data-id");
+      currentJournal.logLibrary.deleteLog(id);
+    });
+  });
+}
+
 LogLibrary.prototype.addLog = function (title, description, date, author, id) {
   date = formatDate(date);
   if (date == null) {
@@ -113,6 +167,7 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
       author,
       currentJournal.logLibrary.library.at(-1).id,
     );
+    allowDeletions();
     return;
   }
 
@@ -126,8 +181,12 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
     currentJournal.logLibrary.library.at(-1).id,
   );
 
+  // Replaces log's ID added to general journal to match with the ID in the current journal
+  generalJournal.logLibrary.library.at(-1).id = this.library.at(-1).id;
+
   currentJournal.setLogsCount();
   currentJournal.displayLogsCount(currentJournal.getLogsCount(), spanPosts);
+  allowDeletions();
 };
 
 function Log(title, description, date, author) {
@@ -246,6 +305,7 @@ function displayLogElements(title, description, date, author, id) {
   svgDeleteIcon.appendChild(path);
 
   allowViewLogs();
+  allowDeletions();
 }
 
 function formatDate(date) {
@@ -487,4 +547,5 @@ form.addEventListener("submit", (e) => {
     currentJournal.id,
   );
   allowViewLogs();
+  allowDeletions();
 });
