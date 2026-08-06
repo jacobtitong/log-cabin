@@ -185,6 +185,12 @@ function displayLogElements(title, description, date, author, id) {
   const preview = document.createElement("div");
   const titleElement = document.createElement("h2");
   const descriptionElement = document.createElement("p");
+  const deleteIcon = document.createElement("span");
+  const svgDeleteIcon = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
   // Setting attributes
   card.setAttribute("data-journal", currentJournal.id);
@@ -198,6 +204,15 @@ function displayLogElements(title, description, date, author, id) {
   circle.setAttribute("cy", "1");
   circle.setAttribute("r", "1");
   circle.setAttribute("fill", "#8D8D8E");
+  svgDeleteIcon.setAttribute("xlmns", "http://www.w3.org/2000/svg");
+  svgDeleteIcon.setAttribute("height", "24px");
+  svgDeleteIcon.setAttribute("viewBox", "0 -960 960 960");
+  svgDeleteIcon.setAttribute("width", "24px");
+  svgDeleteIcon.setAttribute("fill", "#e3e3e3");
+  path.setAttribute(
+    "d",
+    "M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z",
+  );
 
   // Adding classes & contents
   card.classList.add("card");
@@ -208,6 +223,7 @@ function displayLogElements(title, description, date, author, id) {
   preview.classList.add("preview");
   titleElement.classList.add("truncate");
   descriptionElement.classList.add("truncate");
+  deleteIcon.classList.add("delete-icon", "icon");
 
   titleElement.textContent = title;
   descriptionElement.textContent = description;
@@ -225,6 +241,9 @@ function displayLogElements(title, description, date, author, id) {
   card.appendChild(preview);
   preview.appendChild(titleElement);
   preview.appendChild(descriptionElement);
+  card.appendChild(deleteIcon);
+  deleteIcon.appendChild(svgDeleteIcon);
+  svgDeleteIcon.appendChild(path);
 
   allowViewLogs();
 }

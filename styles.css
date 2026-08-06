@@ -188,7 +188,7 @@ aside {
   padding: 10px;
   padding-bottom: 20px;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 250px 1fr 24px;
   gap: 50px;
   cursor: pointer;
 }
@@ -263,6 +263,10 @@ li.selected .minus-icon {
 
 .add-log .plus-icon {
   fill: var(--primary-color);
+}
+
+.delete-icon {
+  fill: var(--primary-color-transparent);
 }
 
 /* Header styles */
