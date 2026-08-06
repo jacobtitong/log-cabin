@@ -4,10 +4,42 @@ function Journals(journals) {
   this.journals.push(new Journal("All"));
   const all = document.querySelector("#all");
   all.setAttribute("data-id", journals[0].id);
+
+  this.authorsCount;
 }
 
 Journals.prototype.addJournal = function (name) {
   this.journals.push(new Journal(name));
+};
+
+Journals.prototype.setAuthorsCount = function () {
+  function capitalize(str) {
+    const string = str.split(" ");
+    const cased = [];
+
+    string.map((word) => {
+      cased.push(word[0].toUpperCase() + word.slice(1).toLowerCase());
+    });
+
+    return cased.join(" ");
+  }
+
+  let authorsList = [];
+  this.journals[0].logLibrary.library.forEach((log) => {
+    authorsList.push(capitalize(log.author));
+  });
+  authorsList = authorsList.filter((item, pos) => {
+    return authorsList.indexOf(item) == pos;
+  });
+  this.authorsCount = authorsList.length;
+  console.log(authorsList, this.authorsCount);
+};
+
+Journals.prototype.displayAuthorsCount = function () {
+  const authorsCountElement = document.querySelector(
+    ".authors-count .number-of-authors",
+  );
+  authorsCountElement.textContent = this.authorsCount;
 };
 
 function Journal(name) {
@@ -15,14 +47,15 @@ function Journal(name) {
   this.logLibrary = new LogLibrary([]);
   this.name = name;
   this.id = crypto.randomUUID();
+  this.logsCount;
 }
 
 Journal.prototype.setLogsCount = function () {
-  this.count = this.logLibrary.library.length;
+  this.logsCount = this.logLibrary.library.length;
 };
 
 Journal.prototype.getLogsCount = function () {
-  return this.count;
+  return this.logsCount;
 };
 
 Journal.prototype.displayLogsCount = function (count, spanPosts) {
@@ -70,6 +103,8 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
   generalJournal.displayLogsCount(generalJournal.getLogsCount(), spanPostsAll);
   generalJournal.displayLogsCount(generalJournal.getLogsCount(), menuNumPosts);
   generalJournal.displayLogsCount(generalJournal.getLogsCount(), postsCount);
+  allJournals.setAuthorsCount();
+  allJournals.displayAuthorsCount();
 
   if (currentJournal.id == generalJournal.id) {
     displayLogElements(
