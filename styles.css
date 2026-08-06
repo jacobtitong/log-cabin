@@ -614,6 +614,9 @@ dialog.dialog-log-view .heading {
 }
 
 dialog.dialog-log-view .paragraph {
+  overflow: auto;
+  white-space: normal;
+  word-break: break-all;
   text-align: justify;
   padding: 10px 0 0 0;
   font-weight: 400;
@@ -628,4 +631,5 @@ dialog.dialog-log-view .status {
 
 dialog.dialog-log-view .status .author {
   text-align: right;
+  width: 250px;
 }
