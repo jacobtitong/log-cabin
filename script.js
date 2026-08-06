@@ -17,6 +17,18 @@ function Journal(name) {
   this.id = crypto.randomUUID();
 }
 
+Journal.prototype.setLogsCount = function () {
+  this.count = this.logLibrary.library.length;
+};
+
+Journal.prototype.getLogsCount = function () {
+  return this.count;
+};
+
+Journal.prototype.displayLogsCount = function (count, spanPosts) {
+  spanPosts.textContent = "[" + ("0" + count).slice(-2) + "]";
+};
+
 Journal.prototype.displayLogs = function () {
   for (const log of this.logLibrary.library) {
     displayLogElements(
@@ -45,6 +57,9 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
     new Log(title, description, date, author),
   );
 
+  generalJournal.setLogsCount();
+  generalJournal.displayLogsCount(generalJournal.getLogsCount(), spanPostsAll);
+
   if (currentJournal.id == generalJournal.id) {
     displayLogElements(
       title,
@@ -65,6 +80,9 @@ LogLibrary.prototype.addLog = function (title, description, date, author, id) {
     author,
     currentJournal.logLibrary.library.at(-1).id,
   );
+
+  currentJournal.setLogsCount();
+  currentJournal.displayLogsCount(currentJournal.getLogsCount(), spanPosts);
 };
 
 function Log(title, description, date, author) {
@@ -274,6 +292,8 @@ function allowJournalMoving(initialJournal) {
 
 // Adding a journal
 const addJournalButton = document.querySelector(".menu .add-journal");
+let spanPosts;
+const spanPostsAll = document.querySelector("#all .number-of-posts");
 
 addJournalButton.addEventListener("click", () => {
   if (addJournalButton.classList.contains("clicked")) {
@@ -317,7 +337,7 @@ addJournalButton.addEventListener("click", () => {
     const liJournalList = document.createElement("li");
     const spanIcon = document.createElement("span");
     const spanJournalName = document.createElement("span");
-    const spanPosts = document.createElement("span");
+    spanPosts = document.createElement("span");
     const svgMinus = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg",
@@ -337,6 +357,7 @@ addJournalButton.addEventListener("click", () => {
     spanPosts.classList.add("number-of-posts");
 
     spanJournalName.textContent = formDataObj.name;
+    spanPosts.textContent = "[00]";
 
     menuList.appendChild(liJournalList);
     liJournalList.appendChild(spanIcon);
