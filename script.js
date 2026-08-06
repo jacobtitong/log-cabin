@@ -491,7 +491,7 @@ addJournalButton.addEventListener("click", () => {
     spanPosts.classList.add("number-of-posts");
 
     spanJournalName.textContent = formDataObj.name;
-    spanPosts.textContent = "[00]";
+    spanPosts.textContent = "[0]";
 
     menuList.appendChild(liJournalList);
     liJournalList.appendChild(spanIcon);
