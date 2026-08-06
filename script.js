@@ -262,6 +262,7 @@ function allowViewLogs() {
 // Allow moving of different journals
 function allowJournalMoving(initialJournal) {
   initialJournal.classList.add("clicked");
+
   currentJournal.displayLogs();
   let liJournalList = document.querySelectorAll(".menu .journal-list li");
 
@@ -285,15 +286,22 @@ function allowJournalMoving(initialJournal) {
       e.currentTarget.classList.add("clicked");
       if (e.currentTarget.classList.contains("clicked")) {
         currentJournal.displayLogs();
+        setCurrentSpanPosts(e.currentTarget.children[2]);
       }
     });
   });
 }
 
+// Span number-of-posts
+const spanPostsAll = document.querySelector("#all .number-of-posts");
+let spanPosts;
+function setCurrentSpanPosts(span) {
+  spanPosts = span;
+  console.log(spanPosts);
+}
+
 // Adding a journal
 const addJournalButton = document.querySelector(".menu .add-journal");
-let spanPosts;
-const spanPostsAll = document.querySelector("#all .number-of-posts");
 
 addJournalButton.addEventListener("click", () => {
   if (addJournalButton.classList.contains("clicked")) {
@@ -316,9 +324,10 @@ addJournalButton.addEventListener("click", () => {
 
   addJournalButton.classList.add("clicked");
 
-  // Removes the .clicked class from 2nd to last list element, so that, when creating a new journal, the previous list item's .clicked class would be removed.
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    // Removes the .clicked class from all list elements, so that, when creating a new journal, all the previous list item's .clicked class would be removed.
     let allLists = document.querySelectorAll(
       ".menu nav ul .journal-list li[data-id]",
     );
@@ -339,7 +348,7 @@ addJournalButton.addEventListener("click", () => {
     const liJournalList = document.createElement("li");
     const spanIcon = document.createElement("span");
     const spanJournalName = document.createElement("span");
-    spanPosts = document.createElement("span");
+    const spanPosts = document.createElement("span");
     const svgMinus = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg",
@@ -376,6 +385,7 @@ addJournalButton.addEventListener("click", () => {
     );
 
     allowJournalMoving(latestList);
+    setCurrentSpanPosts(spanPosts);
   });
 });
 
