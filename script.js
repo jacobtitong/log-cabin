@@ -319,10 +319,12 @@ addJournalButton.addEventListener("click", () => {
   // Removes the .clicked class from 2nd to last list element, so that, when creating a new journal, the previous list item's .clicked class would be removed.
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let latestList = document.querySelector(
-      ".menu nav ul .journal-list li[data-id]:nth-last-child(2)",
+    let allLists = document.querySelectorAll(
+      ".menu nav ul .journal-list li[data-id]",
     );
-    latestList.classList.remove("clicked");
+    allLists.forEach((list) => {
+      list.classList.remove("clicked");
+    });
 
     addJournalButton.classList.remove("clicked");
     const formData = new FormData(form);
