@@ -7,7 +7,9 @@ This is my first big personal project I have created which was inspired by the [
 ## Table of contents
 
 - [Overview](#overview)
-  - [Screenshot](#screenshot)
+  - [Screenshots](#screenshots)
+    - [Initial Design Created in Figma](#initial-design-created-in-figma)
+    - [Final Website Design](#final-website-design)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -19,7 +21,7 @@ This is my first big personal project I have created which was inspired by the [
 
 ## Overview
 
-### Screenshot
+### Screenshots
 
 #### Initial Design Created in Figma
 
@@ -253,9 +255,9 @@ I want to continue learning the best practices on how to properly structure my c
 ## Author
 
 - Github - [jacobtitong](https://github.com/jacobtitong)
-- Linkedin - [Jacob Titong](https://www.linkedin.com/in/jacobtitong/)
+- LinkedIn - [Jacob Titong](https://www.linkedin.com/in/jacobtitong/)
 - Frontend Mentor - [@jacobtitong](https://www.frontendmentor.io/profile/jacobtitong)
 
 ## Acknowledgments
 
-Credits to this [website](https://www.greptile.com/blog) for giving me a reference to design this project in Figma.
+Credits to this [greptile.com](https://www.greptile.com/blog) for giving me a reference to design this project in Figma.
