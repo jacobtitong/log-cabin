@@ -260,4 +260,4 @@ I want to continue learning the best practices on how to properly structure my c
 
 ## Acknowledgments
 
-Credits to this [greptile.com](https://www.greptile.com/blog) for giving me a reference to design this project in Figma.
+Credits to [greptile.com](https://www.greptile.com/blog) for giving me a reference to design this project in Figma.
