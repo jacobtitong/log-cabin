@@ -212,6 +212,11 @@ Log.prototype.viewLog = function (heading, paragraph, date, author) {
   authorElement.textContent = author;
 
   dialogLogView.showModal();
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.contains(dialogLogView)) return;
+    dialogLogView.close();
+  });
 };
 
 function removeCards(journalID) {
