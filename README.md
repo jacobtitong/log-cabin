@@ -240,6 +240,33 @@ function LogLibrary(library) {
 }
 ```
 
+12. Learned how to make modal dialogs close upon clicking outside of it.
+
+```js
+document.addEventListener("click", (e) => {
+  if (!e.target.contains(dialogLog)) return;
+  dialogLog.close();
+});
+```
+
+13. Learned how to make sticky elements without overlapping each other.
+
+```css
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sticky {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: sticky;
+  top: 100px;
+}
+```
+
 ### Continued development
 
 I want to continue learning the best practices on how to properly structure my code and make it cleaner and maintainable for other developers. As of now, my code for this project seems a bit messy and I suspect that I will have a difficult time analyzing it in the future.
