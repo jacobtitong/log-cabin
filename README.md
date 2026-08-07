@@ -282,7 +282,6 @@ I want to continue learning the best practices on how to properly structure my c
 ## Author
 
 - Github - [jacobtitong](https://github.com/jacobtitong)
-- LinkedIn - [Jacob Titong](https://www.linkedin.com/in/jacobtitong/)
 - Frontend Mentor - [@jacobtitong](https://www.frontendmentor.io/profile/jacobtitong)
 
 ## Acknowledgments
